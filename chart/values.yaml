@@ -40,6 +40,11 @@ awsLoadBalancerController:
   podDisruptionBudget:
     maxUnavailable: 1
 
+# AWS Node Termination Handler Values
+awsNodeTerminationHandler:
+  enable: false
+  serviceAccountName:
+
 # AWS Otel Collector Values
 awsOtelCollector:
   enable: false
@@ -59,7 +64,7 @@ certManagerCsiDriver:
 clusterAutoscaler:
   enable: false
   serviceAccountName:
-    
+
 # Datadog Operator
 datadogOperator:
   enable: false
@@ -92,6 +97,10 @@ grafana:
   enable: false
   serviceAccount:
     create: false
+
+# Vault default Values
+vault:
+  enable: false
 
 # Karpenter Values
 karpenter:
@@ -146,6 +155,10 @@ tetrateIstio:
   cni:
   istiod:
   global:
+
+# Thanos Values
+thanos:
+  enable: false
 
 # Traefik Values
 traefik:
@@ -214,7 +227,7 @@ policies:
 
 reporter:
   enable: false
-  
+
 # NVIDIA Device Plugin Values
 nvidiaDevicePlugin:
   enable: false

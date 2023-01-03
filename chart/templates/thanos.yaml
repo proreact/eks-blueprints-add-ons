@@ -1,8 +1,8 @@
-{{- if and (.Values.tetrateIstio) (.Values.tetrateIstio.enable) -}}
+{{- if and (.Values.thanos) (.Values.thanos.enable) -}}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tetrate-istio
+  name: thanos
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -10,21 +10,15 @@ spec:
   project: default
   source:
     repoURL: {{ .Values.repoUrl }}
-    path: add-ons/tetrate-istio
+    path: add-ons/thanos
     targetRevision: {{ .Values.targetRevision }}
     helm:
       values: |
-        base:
-        {{- toYaml .Values.tetrateIstio.base | nindent 10 }}
-        cni:
-        {{- toYaml .Values.tetrateIstio.cni | nindent 10 }}
-        istiod:
-        {{- toYaml .Values.tetrateIstio.istiod | nindent 10 }}
-        global:
-        {{- toYaml .Values.tetrateIstio.global | nindent 10 }}
+        thanos:
+        {{- toYaml .Values.thanos | nindent 10 }}
   destination:
     server: https://kubernetes.default.svc
-    namespace: istio-system
+    namespace: thanos
   syncPolicy:
     automated:
       prune: true
